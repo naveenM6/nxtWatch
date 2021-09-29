@@ -1,0 +1,12 @@
+a {
+  text-decoration: none;
+}
+span {
+  padding-left: 10px;
+}
+.light {
+  color: white;
+}
+.dark {
+  color: black;
+}

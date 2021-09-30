@@ -21,8 +21,6 @@ export const VideoFrameContainer = styled.div`
 export const ParaEl = styled.p`
   font-size: 15px;
   padding-left: 20px;
-  cursor: ${props => props.crsr};
-  margin-top: -5px;
   padding-bottom: ${props => props.padding} @media (min-width: 768px) {
     align-self: flex-start;
   }
@@ -49,4 +47,13 @@ export const ContentContainer = styled.div``
 
 export const ImageEl = styled.img`
   height: 40px;
+`
+export const IconParas = styled.p`
+  cursor: pointer;
+  color: ${props => props.iconColor};
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
 `

@@ -13,6 +13,7 @@ import {
   ChannelContainer,
   ImageEl,
   ContentContainer,
+  IconParas,
 } from './styledComponents'
 
 import AppTheme from '../../context/Theme'
@@ -20,7 +21,12 @@ import AppTheme from '../../context/Theme'
 import './index.css'
 
 class VideoCard extends Component {
-  state = {videoDetails: {}, channelDataObj: {}}
+  state = {
+    videoDetails: {},
+    channelDataObj: {},
+    liked: false,
+    disliked: false,
+  }
 
   componentDidMount() {
     this.getData()
@@ -71,8 +77,32 @@ class VideoCard extends Component {
     }
   }
 
+  isDisliked = () => {
+    const {liked, disliked} = this.state
+    if (liked) {
+      this.setState({liked: false})
+    }
+    if (disliked) {
+      this.setState({disliked: false})
+    } else {
+      this.setState({disliked: true})
+    }
+  }
+
+  isLiked = () => {
+    const {liked, disliked} = this.state
+    if (disliked) {
+      this.setState({disliked: false})
+    }
+    if (liked) {
+      this.setState({liked: false})
+    } else {
+      this.setState({liked: true})
+    }
+  }
+
   render() {
-    const {videoDetails, channelDataObj} = this.state
+    const {videoDetails, channelDataObj, liked, disliked} = this.state
     const {videoUrl, title, viewCount, publishedAt, description} = videoDetails
     return (
       <AppTheme.Consumer>
@@ -94,15 +124,21 @@ class VideoCard extends Component {
                   {viewCount} views . {publishedAt}
                 </ParaEl>
                 <ChannelContainer color={color}>
-                  <ParaEl crsr="pointer">
-                    <AiOutlineLike /> Like
-                  </ParaEl>
-                  <ParaEl crsr="pointer">
-                    <AiOutlineDislike /> Dislike
-                  </ParaEl>
-                  <ParaEl crsr="pointer">
-                    <MdPlaylistAdd /> Save
-                  </ParaEl>
+                  <IconParas
+                    onClick={this.isLiked}
+                    iconColor={liked ? '#3b82f6' : '#000000'}
+                  >
+                    <AiOutlineLike size={20} /> Like
+                  </IconParas>
+                  <IconParas
+                    onClick={this.isDisliked}
+                    iconColor={disliked ? '#3b82f6' : '#000000'}
+                  >
+                    <AiOutlineDislike size={20} /> Dislike
+                  </IconParas>
+                  <IconParas onClick={this.savedVideos}>
+                    <MdPlaylistAdd size={20} /> Save
+                  </IconParas>
                 </ChannelContainer>
               </AttributesContainer>
               <ChannelContainer>

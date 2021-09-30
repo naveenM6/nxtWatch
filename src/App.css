@@ -35,4 +35,7 @@ body {
     overflow: auto;
     width: 100%;
   }
+  .content::-webkit-scrollbar {
+  display: none;
+}
 }

@@ -36,20 +36,26 @@ class App extends Component {
           <div className="app-container">
             <Switch>
               <Route exact path="/login" component={Login} />
-              <Header />
-              <div className={`${bgColor} main-frame-container`}>
-                <Navbar />
-                <div className="content">
-                  <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/trending" component={Trending} />
-                    <Route exact path="/gaming" component={Gaming} />
-                    <Route exact path="/videos/:id" component={VideoCard} />
-                    <Route exact path="/saved-videos" component={SavedVideos} />
-                    <Route component={NotFound} />
-                  </Switch>
+              <>
+                <Header />
+                <div className={`${bgColor} main-frame-container`}>
+                  <Navbar />
+                  <div className="content">
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/trending" component={Trending} />
+                      <Route exact path="/gaming" component={Gaming} />
+                      <Route exact path="/videos/:id" component={VideoCard} />
+                      <Route component={NotFound} />
+                      <Route
+                        exact
+                        path="/saved-videos"
+                        component={SavedVideos}
+                      />
+                    </Switch>
+                  </div>
                 </div>
-              </div>
+              </>
             </Switch>
           </div>
         </>

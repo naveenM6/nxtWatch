@@ -24,6 +24,8 @@ export const ListItems = styled.li`
   display: flex;
   align-items: center;
   padding: 10px 25px;
+  transition: background-color 0.5s;
+  transform-origin: center center;
 
   :hover {
     background-color: ${props => props.bgColor};

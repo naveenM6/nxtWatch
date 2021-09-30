@@ -126,13 +126,13 @@ class VideoCard extends Component {
                 <ChannelContainer color={color}>
                   <IconParas
                     onClick={this.isLiked}
-                    iconColor={liked ? '#3b82f6' : '#000000'}
+                    iconColor={liked ? '#3b82f6' : color}
                   >
                     <AiOutlineLike size={20} /> Like
                   </IconParas>
                   <IconParas
                     onClick={this.isDisliked}
-                    iconColor={disliked ? '#3b82f6' : '#000000'}
+                    iconColor={disliked ? '#3b82f6' : color}
                   >
                     <AiOutlineDislike size={20} /> Dislike
                   </IconParas>

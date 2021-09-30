@@ -7,6 +7,7 @@ export const VideoContainer = styled.div`
   background-color: ${props => props.bgColor};
   color: ${props => props.color};
   overflow: auto;
+  padding: 20px 20px;
 `
 
 export const VideoFrameContainer = styled.div`

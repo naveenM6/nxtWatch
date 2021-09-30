@@ -21,7 +21,8 @@ export const VideoFrameContainer = styled.div`
 export const ParaEl = styled.p`
   font-size: 15px;
   padding-left: 20px;
-  padding-bottom: ${props => props.padding} @media (min-width: 768px) {
+  padding-bottom: ${props => props.padding};
+  @media (min-width: 768px) {
     align-self: flex-start;
   }
   @media (max-width: 767px) {

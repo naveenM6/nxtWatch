@@ -23,7 +23,11 @@ import {
 class Gaming extends Component {
   state = {dataArray: [], isLoading: true}
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getVideos()
+  }
+
+  getVideos = async () => {
     const jwtToken = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/videos/gaming'
     const options = {

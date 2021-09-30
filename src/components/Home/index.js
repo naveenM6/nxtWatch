@@ -24,7 +24,11 @@ import {
 class Home extends Component {
   state = {dataArray: [], isLoading: true}
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getVideos()
+  }
+
+  getVideos = async () => {
     const jwtToken = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/videos/all?search='
     const options = {
@@ -36,6 +40,7 @@ class Home extends Component {
     const response = await fetch(url, options)
     if (response.ok) {
       const data = await response.json()
+      console.log(data)
       await this.setState({dataArray: data.videos})
     }
     this.setState({isLoading: false})

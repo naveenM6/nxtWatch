@@ -27,7 +27,7 @@ export const ListItems = styled.li`
 
   :hover {
     background-color: ${props => props.bgColor};
-    color: #000000;
+    color: black;
     .nav-icons {
       color: red;
     }

@@ -22,7 +22,15 @@ import './index.css'
 class VideoCard extends Component {
   state = {videoDetails: {}, channelDataObj: {}}
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getData()
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
+  }
+
+  getData = async () => {
     this.mounted = true
     const {match} = this.props
     const {params} = match
@@ -61,10 +69,6 @@ class VideoCard extends Component {
         })
       }
     }
-  }
-
-  componentWillUnmount() {
-    this.mounted = false
   }
 
   render() {
@@ -110,7 +114,7 @@ class VideoCard extends Component {
                   <ParaEl>{channelDataObj.subscriberCount}</ParaEl>
                 </ContentContainer>
               </ChannelContainer>
-              <ParaEl>{description}</ParaEl>
+              <ParaEl padding="30px">{description}</ParaEl>
             </VideoContainer>
           )
         }}

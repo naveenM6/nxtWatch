@@ -23,7 +23,7 @@ export const ParaEl = styled.p`
   padding-left: 20px;
   cursor: ${props => props.crsr};
   margin-top: -5px;
-  @media (min-width: 768px) {
+  padding-bottom: ${props => props.padding} @media (min-width: 768px) {
     align-self: flex-start;
   }
   @media (max-width: 767px) {

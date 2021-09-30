@@ -26,7 +26,11 @@ import {
 class Trending extends Component {
   state = {dataArray: [], isLoading: true}
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getVideos()
+  }
+
+  getVideos = async () => {
     const jwtToken = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/videos/trending'
     const options = {

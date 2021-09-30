@@ -12,6 +12,10 @@ body {
   height: 100vh;
 }
 
+.main-frame-container {
+  padding-top: 50px;
+}
+
 @media (min-width: 768px) {
   body {
     overflow: hidden;
@@ -27,8 +31,8 @@ body {
     display: flex;
     height: 100vh;
   }
-  .content{
-      overflow: auto;
-      width: 100%;
+  .content {
+    overflow: auto;
+    width: 100%;
   }
 }

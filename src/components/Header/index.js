@@ -8,7 +8,8 @@ import {GiHamburgerMenu} from 'react-icons/gi'
 import {FiLogOut} from 'react-icons/fi'
 import {ImCross} from 'react-icons/im'
 
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import './index.css'
 
@@ -36,6 +37,12 @@ class Header extends Component {
 
   hideHeader = () => {
     this.setState({displayHeader: 'none'})
+  }
+
+  logOut = () => {
+    const {history} = this.props
+    Cookies.remove('jwt_token')
+    history.replace('/login')
   }
 
   render() {
@@ -73,7 +80,7 @@ class Header extends Component {
                 <ButtonElSmall color={`${color}`} onClick={this.showHeader}>
                   <GiHamburgerMenu size={25} />
                 </ButtonElSmall>
-                <ButtonElSmall color={`${color}`}>
+                <ButtonElSmall color={`${color}`} onClick={this.logOut}>
                   <FiLogOut size={25} />
                 </ButtonElSmall>
               </HeaderContentsSmallContainer>
@@ -82,7 +89,9 @@ class Header extends Component {
                   bgColor={activeTheme === 'light' ? '#e2e8f0' : '#000000'}
                 >
                   <Para onClick={this.hideHeader}>
-                    <ImCross />
+                    <ImCross
+                      color={activeTheme === 'light' ? '#000' : ' #d7dfe9'}
+                    />
                   </Para>
                   <Link
                     to="/"
@@ -140,6 +149,7 @@ class Header extends Component {
                 <ButtonElLarge
                   color={activeTheme === 'light' ? '#3b82f6' : '#ffffff'}
                   padding="5px 15px"
+                  onClick={this.logOut}
                 >
                   Logout
                 </ButtonElLarge>
@@ -152,4 +162,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withRouter(Header)

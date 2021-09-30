@@ -46,12 +46,12 @@ class App extends Component {
                       <Route exact path="/trending" component={Trending} />
                       <Route exact path="/gaming" component={Gaming} />
                       <Route exact path="/videos/:id" component={VideoCard} />
-                      <Route component={NotFound} />
                       <Route
                         exact
                         path="/saved-videos"
                         component={SavedVideos}
                       />
+                      <Route component={NotFound} />
                     </Switch>
                   </div>
                 </div>

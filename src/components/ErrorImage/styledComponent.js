@@ -6,10 +6,17 @@ export const ErrorContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 767px) {
+    padding: 25px;
+    padding-top: 50px;
+  }
 `
 export const ErrorImg = styled.img`
   width: 35%;
   object-fit: contain;
+  @media (max-width: 767px) {
+    width: 50%;
+  }
 `
 export const Head = styled.h1``
 

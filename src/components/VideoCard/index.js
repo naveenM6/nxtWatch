@@ -26,6 +26,7 @@ class VideoCard extends Component {
     channelDataObj: {},
     liked: false,
     disliked: false,
+    saved: false,
   }
 
   componentDidMount() {
@@ -58,7 +59,7 @@ class VideoCard extends Component {
         description: data.description,
         id: data.id,
         publishedAt: data.published_at,
-        thumbnailUrl: data.thumbnailUrl,
+        thumbnailUrl: data.thumbnail_url,
         title: data.title,
         videoUrl: data.video_url,
         viewCount: data.view_count,
@@ -101,15 +102,29 @@ class VideoCard extends Component {
     }
   }
 
+  isSaved = async () => {
+    const {saved} = this.state
+    if (saved) {
+      await this.setState({saved: false})
+    } else {
+      await this.setState({saved: true})
+    }
+  }
+
   render() {
-    const {videoDetails, channelDataObj, liked, disliked} = this.state
+    const {videoDetails, channelDataObj, liked, disliked, saved} = this.state
     const {videoUrl, title, viewCount, publishedAt, description} = videoDetails
     return (
       <AppTheme.Consumer>
         {values => {
-          const {activeTheme} = values
+          const {activeTheme, addSavedVideos} = values
           const bgColor = activeTheme === 'light' ? '#ffffff' : '#000000'
           const color = activeTheme === 'light' ? '#000000' : '#ffffff'
+
+          const onSave = () => {
+            this.isSaved()
+            addSavedVideos(videoDetails)
+          }
 
           return (
             <VideoContainer bgColor={bgColor} color={color}>
@@ -136,8 +151,11 @@ class VideoCard extends Component {
                   >
                     <AiOutlineDislike size={20} /> Dislike
                   </IconParas>
-                  <IconParas onClick={this.savedVideos}>
-                    <MdPlaylistAdd size={20} /> Save
+                  <IconParas
+                    onClick={onSave}
+                    iconColor={saved ? '#3b82f6' : color}
+                  >
+                    <MdPlaylistAdd size={20} /> {saved ? 'Saved' : 'Save'}
                   </IconParas>
                 </ChannelContainer>
               </AttributesContainer>

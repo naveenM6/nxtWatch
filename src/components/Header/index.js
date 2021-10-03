@@ -124,7 +124,7 @@ class Header extends Component {
                   >
                     <ListItem color={`${color}`}>
                       <MdPlaylistAdd className="nav-icons" />
-                      <span>Saved videos</span>
+                      <span>Saved Videos</span>
                     </ListItem>
                   </Link>
                 </ListContainer>
@@ -133,12 +133,12 @@ class Header extends Component {
                 <ButtonElLarge
                   border="none"
                   onClick={onChangeTheme}
-                  color={`${color}`}
+                  color={color}
                 >
                   {activeTheme === 'light' ? (
                     <BsMoon size={25} />
                   ) : (
-                    <BsBrightnessHigh size={25} />
+                    <BsBrightnessHigh size={25} className="animate" />
                   )}
                 </ButtonElLarge>
                 <ImageEl

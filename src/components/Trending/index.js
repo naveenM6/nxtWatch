@@ -23,14 +23,17 @@ import {
   ParaTag,
 } from './styledComponents'
 
+import ErrorImage from '../ErrorImage'
+
 class Trending extends Component {
-  state = {dataArray: [], isLoading: true}
+  state = {dataArray: [], isLoading: true, status: ''}
 
   componentDidMount() {
     this.getVideos()
   }
 
   getVideos = async () => {
+    this.setState({isLoading: true})
     const jwtToken = Cookies.get('jwt_token')
     const url = 'https://apis.ccbp.in/videos/trending'
     const options = {
@@ -42,20 +45,22 @@ class Trending extends Component {
     const response = await fetch(url, options)
     if (response.ok) {
       const data = await response.json()
-      await this.setState({dataArray: data.videos})
+      await this.setState({dataArray: data.videos, status: true})
+    } else {
+      await this.setState({status: false})
     }
     this.setState({isLoading: false})
   }
 
   render() {
-    const {dataArray, isLoading} = this.state
+    const {dataArray, isLoading, status} = this.state
     return (
       <AppTheme.Consumer>
         {value => {
           const {activeTheme} = value
 
           const color = activeTheme === 'light' ? '#000000' : '#ffffff'
-          const bgColor = activeTheme === 'light' ? '#ffffff' : '#000000'
+          const bgColor = activeTheme === 'light' ? '#f9f9f9' : '#000000'
 
           return (
             <HomeContainer bgColor={`${bgColor}`} color={`${color}`}>
@@ -63,55 +68,67 @@ class Trending extends Component {
                 <LoaderComp />
               ) : (
                 <>
-                  <HeadDiv>
-                    <HeaderEl
-                      bgColor={activeTheme === 'light' ? '#f1f1f1' : '#181818'}
-                      color={color}
-                    >
-                      <AiFillFire
-                        className={`trend-icon ${activeTheme}-icon`}
-                      />{' '}
-                      Trending
-                    </HeaderEl>
-                  </HeadDiv>
-                  <ContentDiv>
-                    {dataArray.map(item => (
-                      <Link
-                        to={`/videos/${item.id}`}
-                        className={
-                          activeTheme === 'light' ? 'link-light' : 'link-dark'
-                        }
-                        key={item.id}
-                      >
-                        <ListContainer>
-                          <ListItem>
-                            <ImageTag
-                              src={`${item.thumbnail_url}`}
-                              width="350px"
-                            />
-                          </ListItem>
-                          <ListItem>
-                            <div className="logo-div">
-                              <LogoImage
-                                src={`${item.channel.profile_image_url}`}
-                                width="30px"
-                              />
-                            </div>
-                            <div>
-                              <ParaTag fontSize="15px">{item.title}</ParaTag>
-                              <ParaTag fontSize="12px">
-                                {item.channel.name}
-                              </ParaTag>
-                              <ParaTag fontSize="12px">
-                                {item.view_count} views .{' '}
-                                <span>{item.published_at}</span>
-                              </ParaTag>
-                            </div>
-                          </ListItem>
-                        </ListContainer>
-                      </Link>
-                    ))}
-                  </ContentDiv>
+                  {status ? (
+                    <>
+                      <HeadDiv>
+                        <HeaderEl
+                          bgColor={
+                            activeTheme === 'light' ? '#f1f1f1' : '#181818'
+                          }
+                          color={color}
+                        >
+                          <AiFillFire
+                            className={`trend-icon ${activeTheme}-icon`}
+                          />{' '}
+                          Trending
+                        </HeaderEl>
+                      </HeadDiv>
+                      <ContentDiv>
+                        {dataArray.map(item => (
+                          <Link
+                            to={`/videos/${item.id}`}
+                            className={
+                              activeTheme === 'light'
+                                ? 'link-light'
+                                : 'link-dark'
+                            }
+                            key={item.id}
+                          >
+                            <ListContainer>
+                              <ListItem>
+                                <ImageTag
+                                  src={`${item.thumbnail_url}`}
+                                  width="350px"
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <div className="logo-div">
+                                  <LogoImage
+                                    src={`${item.channel.profile_image_url}`}
+                                    width="30px"
+                                  />
+                                </div>
+                                <div>
+                                  <ParaTag fontSize="15px">
+                                    {item.title}
+                                  </ParaTag>
+                                  <ParaTag fontSize="12px">
+                                    {item.channel.name}
+                                  </ParaTag>
+                                  <ParaTag fontSize="12px">
+                                    {item.view_count} views .{' '}
+                                    <span>{item.published_at}</span>
+                                  </ParaTag>
+                                </div>
+                              </ListItem>
+                            </ListContainer>
+                          </Link>
+                        ))}
+                      </ContentDiv>
+                    </>
+                  ) : (
+                    <ErrorImage />
+                  )}
                 </>
               )}
             </HomeContainer>

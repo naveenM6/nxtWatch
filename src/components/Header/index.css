@@ -4,9 +4,15 @@ a {
 span {
   padding-left: 10px;
 }
-.light {
-  color: white;
+.animate:hover {
+  animation: rotate 3s;
 }
-.dark {
-  color: black;
+
+@keyframes rotate{
+    0%{
+        transform:rotateZ(90deg);
+    }
+    100%{
+        transform:rotateZ(-90deg);
+    }
 }

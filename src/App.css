@@ -21,11 +21,11 @@ body {
     overflow: hidden;
   }
   .light {
-    background: #ffffff;
+    background-color: #ffffff;
   }
 
   .dark {
-    background: #231f20;
+    background-color: #231f20;
   }
   .main-frame-container {
     display: flex;

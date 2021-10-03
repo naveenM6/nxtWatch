@@ -1,4 +1,13 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+
+const FadeIn = keyframes`
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+`
 
 export const HeaderContainer = styled.div`
   position: fixed;
@@ -73,6 +82,7 @@ export const ListContainer = styled.ul`
 `
 export const ExtraDiv = styled.div`
   display: ${props => props.display};
+  animation: ${FadeIn} 0.5s;
 `
 
 export const ListItem = styled.li`

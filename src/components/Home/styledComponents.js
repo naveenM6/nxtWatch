@@ -4,6 +4,9 @@ export const HomeContainer = styled.div`
   padding: 30px;
   background-color: ${props => props.bgColor};
   color: ${props => props.color};
+  @media (max-width: 767px) {
+    margin-top: 24px;
+  }
 `
 
 export const HeadDiv = styled.div`

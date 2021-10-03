@@ -40,7 +40,6 @@ class Home extends Component {
     const response = await fetch(url, options)
     if (response.ok) {
       const data = await response.json()
-      console.log(data)
       await this.setState({dataArray: data.videos})
     }
     this.setState({isLoading: false})
@@ -52,9 +51,8 @@ class Home extends Component {
       <AppTheme.Consumer>
         {value => {
           const {activeTheme} = value
-
           const color = activeTheme === 'light' ? '#000000' : '#ffffff'
-          const bgColor = activeTheme === 'light' ? '#ffffff' : '#000000'
+          const bgColor = activeTheme === 'light' ? '#f9f9f9' : '#000000'
 
           return (
             <HomeContainer bgColor={`${bgColor}`} color={`${color}`}>

@@ -8,7 +8,11 @@ export const HomeContainer = styled.div`
   }
 `
 
-export const HeadDiv = styled.div``
+export const HeadDiv = styled.div`
+  @media (max-width: 767px) {
+    margin-top: 45px;
+  }
+`
 
 export const HeaderEl = styled.h1`
   background-color: ${props => props.bgColor};

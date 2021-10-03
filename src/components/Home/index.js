@@ -9,6 +9,8 @@ import './index.css'
 
 import AppTheme from '../../context/Theme'
 
+import ErrorImage from '../ErrorImage'
+
 import {
   HomeContainer,
   HeadDiv,
@@ -22,7 +24,7 @@ import {
 } from './styledComponents'
 
 class Home extends Component {
-  state = {dataArray: [], isLoading: true}
+  state = {dataArray: [], isLoading: true, status: ''}
 
   componentDidMount() {
     this.getVideos()
@@ -40,13 +42,15 @@ class Home extends Component {
     const response = await fetch(url, options)
     if (response.ok) {
       const data = await response.json()
-      await this.setState({dataArray: data.videos})
+      await this.setState({dataArray: data.videos, status: true})
+    } else {
+      this.setState({status: false})
     }
     this.setState({isLoading: false})
   }
 
   render() {
-    const {dataArray, isLoading} = this.state
+    const {dataArray, isLoading, status} = this.state
     return (
       <AppTheme.Consumer>
         {value => {
@@ -60,50 +64,60 @@ class Home extends Component {
                 <LoaderComp />
               ) : (
                 <>
-                  <HeadDiv>
-                    <SearchIp type="search" />
-                    <ButtonEl>
-                      <AiOutlineSearch size={20} />
-                    </ButtonEl>
-                  </HeadDiv>
-                  <ContentDiv>
-                    {dataArray.map(item => (
-                      <Link
-                        to={`/videos/${item.id}`}
-                        className={
-                          activeTheme === 'light' ? 'link-light' : 'link-dark'
-                        }
-                        key={item.id}
-                      >
-                        <ListContainer>
-                          <ListItem>
-                            <ImageTag
-                              src={`${item.thumbnail_url}`}
-                              width="100%"
-                            />
-                          </ListItem>
-                          <ListItem>
-                            <div className="logo-div">
-                              <ImageTag
-                                src={`${item.channel.profile_image_url}`}
-                                width="30px"
-                              />
-                            </div>
-                            <div>
-                              <ParaTag fontSize="15px">{item.title}</ParaTag>
-                              <ParaTag fontSize="12px">
-                                {item.channel.name}
-                              </ParaTag>
-                              <ParaTag fontSize="12px">
-                                {item.view_count} views .{' '}
-                                <span>{item.published_at}</span>
-                              </ParaTag>
-                            </div>
-                          </ListItem>
-                        </ListContainer>
-                      </Link>
-                    ))}
-                  </ContentDiv>
+                  {status ? (
+                    <>
+                      <HeadDiv>
+                        <SearchIp type="search" />
+                        <ButtonEl>
+                          <AiOutlineSearch size={20} />
+                        </ButtonEl>
+                      </HeadDiv>
+                      <ContentDiv>
+                        {dataArray.map(item => (
+                          <Link
+                            to={`/videos/${item.id}`}
+                            className={
+                              activeTheme === 'light'
+                                ? 'link-light'
+                                : 'link-dark'
+                            }
+                            key={item.id}
+                          >
+                            <ListContainer>
+                              <ListItem>
+                                <ImageTag
+                                  src={`${item.thumbnail_url}`}
+                                  width="100%"
+                                />
+                              </ListItem>
+                              <ListItem>
+                                <div className="logo-div">
+                                  <ImageTag
+                                    src={`${item.channel.profile_image_url}`}
+                                    width="30px"
+                                  />
+                                </div>
+                                <div>
+                                  <ParaTag fontSize="15px">
+                                    {item.title}
+                                  </ParaTag>
+                                  <ParaTag fontSize="12px">
+                                    {item.channel.name}
+                                  </ParaTag>
+                                  <ParaTag fontSize="12px">
+                                    {item.view_count} views .{' '}
+                                    <span>{item.published_at}</span>
+                                  </ParaTag>
+                                </div>
+                              </ListItem>
+                            </ListContainer>
+                          </Link>
+                        ))}
+                      </ContentDiv>
+                    </>
+                  ) : (
+                    <ErrorImage />
+                  )}
                 </>
               )}
             </HomeContainer>

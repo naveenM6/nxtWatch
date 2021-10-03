@@ -7,9 +7,9 @@ import {AiFillFire} from 'react-icons/ai'
 
 import LoaderComp from '../Loader'
 
-import './index.css'
-
 import AppTheme from '../../context/Theme'
+
+import './index.css'
 
 import {
   HomeContainer,

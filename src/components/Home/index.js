@@ -67,7 +67,7 @@ class Home extends Component {
                   {status ? (
                     <>
                       <HeadDiv>
-                        <SearchIp type="search" />
+                        <SearchIp placeholder="Search Channel" type="search" />
                         <ButtonEl>
                           <AiOutlineSearch size={20} />
                         </ButtonEl>

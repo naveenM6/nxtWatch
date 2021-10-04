@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 // import {Redirect} from 'react-router-dom'
-import {AiFillFire} from 'react-icons/ai'
+import {SiYoutubegaming} from 'react-icons/si'
 import {Link} from 'react-router-dom'
 import LoaderComp from '../Loader'
 
@@ -73,7 +73,7 @@ class Gaming extends Component {
                           }
                           color={color}
                         >
-                          <AiFillFire
+                          <SiYoutubegaming
                             className={`trend-icon ${activeTheme}-icon`}
                           />{' '}
                           Gaming

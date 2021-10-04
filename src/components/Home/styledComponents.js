@@ -43,7 +43,7 @@ export const ListContainer = styled.ul`
   padding: 0;
   margin-bottom: 25px;
   @media (min-width: 768px) {
-    width: 250px;
+    width: 300px;
     height: 270px;
   }
 `

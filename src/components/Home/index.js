@@ -39,11 +39,13 @@ class Home extends Component {
       },
       method: 'GET',
     }
-    const response = await fetch(url, options)
-    if (response.ok) {
-      const data = await response.json()
-      await this.setState({dataArray: data.videos, status: true})
-    } else {
+    try {
+      const response = await fetch(url, options)
+      if (response.ok) {
+        const data = await response.json()
+        await this.setState({dataArray: data.videos, status: true})
+      }
+    } catch {
       this.setState({status: false})
     }
     this.setState({isLoading: false})
@@ -57,6 +59,12 @@ class Home extends Component {
     const {searchIp} = this.state
     this.getVideos(searchIp)
     this.setState({searchIp: ''})
+  }
+
+  onKey = e => {
+    if (e.key.toLowerCase() === 'enter') {
+      this.onSearch()
+    }
   }
 
   render() {
@@ -82,6 +90,7 @@ class Home extends Component {
                           type="search"
                           value={searchIp}
                           onChange={this.onChange}
+                          onKeyDown={this.onKey}
                         />
                         <ButtonEl onClick={this.onSearch}>
                           <AiOutlineSearch size={20} />
@@ -131,7 +140,7 @@ class Home extends Component {
                       </ContentDiv>
                     </>
                   ) : (
-                    <ErrorImage />
+                    <ErrorImage refresh={this.getVideos} />
                   )}
                 </>
               )}

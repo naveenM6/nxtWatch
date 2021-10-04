@@ -42,11 +42,13 @@ class Trending extends Component {
       },
       method: 'GET',
     }
-    const response = await fetch(url, options)
-    if (response.ok) {
-      const data = await response.json()
-      await this.setState({dataArray: data.videos, status: true})
-    } else {
+    try {
+      const response = await fetch(url, options)
+      if (response.ok) {
+        const data = await response.json()
+        await this.setState({dataArray: data.videos, status: true})
+      }
+    } catch {
       await this.setState({status: false})
     }
     this.setState({isLoading: false})
@@ -128,7 +130,7 @@ class Trending extends Component {
                       </ContentDiv>
                     </>
                   ) : (
-                    <ErrorImage />
+                    <ErrorImage render={this.getVideos} />
                   )}
                 </>
               )}

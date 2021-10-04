@@ -2,10 +2,15 @@ import {ErrorContainer, Para, Head, Button, ErrorImg} from './styledComponent'
 
 import AppTheme from '../../context/Theme'
 
-const ErrorImage = () => (
+const ErrorImage = props => (
   <AppTheme.Consumer>
     {value => {
       const {activeTheme} = value
+
+      const refreshPage = () => {
+        props.refresh()
+      }
+
       return (
         <ErrorContainer>
           {activeTheme === 'light' ? (
@@ -18,7 +23,7 @@ const ErrorImage = () => (
             We are having some trouble to complete your request. Please try
             again.
           </Para>
-          <Button>retry</Button>
+          <Button onClick={refreshPage}>retry</Button>
         </ErrorContainer>
       )
     }}

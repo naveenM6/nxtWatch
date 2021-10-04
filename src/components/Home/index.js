@@ -24,15 +24,15 @@ import {
 } from './styledComponents'
 
 class Home extends Component {
-  state = {dataArray: [], isLoading: true, status: ''}
+  state = {dataArray: [], isLoading: true, status: '', searchIp: ''}
 
   componentDidMount() {
     this.getVideos()
   }
 
-  getVideos = async () => {
+  getVideos = async (searchVal = '') => {
     const jwtToken = Cookies.get('jwt_token')
-    const url = 'https://apis.ccbp.in/videos/all?search='
+    const url = `https://apis.ccbp.in/videos/all?search=${searchVal}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -49,8 +49,18 @@ class Home extends Component {
     this.setState({isLoading: false})
   }
 
+  onChange = e => {
+    this.setState({searchIp: e.target.value})
+  }
+
+  onSearch = () => {
+    const {searchIp} = this.state
+    this.getVideos(searchIp)
+    this.setState({searchIp: ''})
+  }
+
   render() {
-    const {dataArray, isLoading, status} = this.state
+    const {dataArray, isLoading, status, searchIp} = this.state
     return (
       <AppTheme.Consumer>
         {value => {
@@ -67,8 +77,13 @@ class Home extends Component {
                   {status ? (
                     <>
                       <HeadDiv>
-                        <SearchIp placeholder="Search Channel" type="search" />
-                        <ButtonEl>
+                        <SearchIp
+                          placeholder="Search Channel"
+                          type="search"
+                          value={searchIp}
+                          onChange={this.onChange}
+                        />
+                        <ButtonEl onClick={this.onSearch}>
                           <AiOutlineSearch size={20} />
                         </ButtonEl>
                       </HeadDiv>

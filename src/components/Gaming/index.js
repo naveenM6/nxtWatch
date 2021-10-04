@@ -74,6 +74,7 @@ class Gaming extends Component {
                           color={color}
                         >
                           <SiYoutubegaming
+                            size={40}
                             className={`trend-icon ${activeTheme}-icon`}
                           />{' '}
                           Gaming

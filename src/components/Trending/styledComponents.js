@@ -27,6 +27,8 @@ export const HeaderEl = styled.h1`
   color: ${props => props.color};
   padding: 20px 0;
   padding-left: 40px;
+  display: flex;
+  align-items: center;
 `
 
 export const ListContainer = styled.ul`

@@ -78,6 +78,7 @@ class Trending extends Component {
                           color={color}
                         >
                           <AiFillFire
+                            size={40}
                             className={`trend-icon ${activeTheme}-icon`}
                           />{' '}
                           Trending

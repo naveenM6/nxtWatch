@@ -66,3 +66,46 @@ export const ContentDiv = styled.div`
 export const ParaTag = styled.p`
   font-size: ${props => props.fontSize};
 `
+
+export const NoResults = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+`
+
+export const NoVideosImage = styled.img`
+  width: 30%;
+  object-fit: contain;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    padding-top: 30px;
+  }
+`
+export const NoResultsHeading = styled.h1`
+  @media (max-width: 767px) {
+    font-size: large;
+  }
+`
+
+export const NoResultsPara = styled.p`
+  @media (max-width: 767px) {
+    font-size: medium;
+  }
+`
+
+export const NoResultsButton = styled.button`
+  background-color: #4f46e5;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+`

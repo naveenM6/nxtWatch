@@ -21,6 +21,11 @@ import {
   ImageTag,
   ContentDiv,
   ParaTag,
+  NoVideosImage,
+  NoResults,
+  NoResultsHeading,
+  NoResultsPara,
+  NoResultsButton,
 } from './styledComponents'
 
 class Home extends Component {
@@ -58,13 +63,16 @@ class Home extends Component {
   onSearch = () => {
     const {searchIp} = this.state
     this.getVideos(searchIp)
-    this.setState({searchIp: ''})
   }
 
   onKey = e => {
     if (e.key.toLowerCase() === 'enter') {
       this.onSearch()
     }
+  }
+
+  retry = () => {
+    this.onSearch()
   }
 
   render() {
@@ -96,48 +104,68 @@ class Home extends Component {
                           <AiOutlineSearch size={20} />
                         </ButtonEl>
                       </HeadDiv>
-                      <ContentDiv>
-                        {dataArray.map(item => (
-                          <Link
-                            to={`/videos/${item.id}`}
-                            className={
-                              activeTheme === 'light'
-                                ? 'link-light'
-                                : 'link-dark'
-                            }
-                            key={item.id}
-                          >
-                            <ListContainer>
-                              <ListItem>
-                                <ImageTag
-                                  src={`${item.thumbnail_url}`}
-                                  width="100%"
-                                />
-                              </ListItem>
-                              <ListItem>
-                                <div className="logo-div">
-                                  <ImageTag
-                                    src={`${item.channel.profile_image_url}`}
-                                    width="30px"
-                                  />
-                                </div>
-                                <div>
-                                  <ParaTag fontSize="15px">
-                                    {item.title}
-                                  </ParaTag>
-                                  <ParaTag fontSize="12px">
-                                    {item.channel.name}
-                                  </ParaTag>
-                                  <ParaTag fontSize="12px">
-                                    {item.view_count} views .{' '}
-                                    <span>{item.published_at}</span>
-                                  </ParaTag>
-                                </div>
-                              </ListItem>
-                            </ListContainer>
-                          </Link>
-                        ))}
-                      </ContentDiv>
+                      <>
+                        {dataArray.length === 0 ? (
+                          <NoResults>
+                            <NoVideosImage
+                              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+                              alt="no videos"
+                            />
+                            <NoResultsHeading>
+                              No Search results found
+                            </NoResultsHeading>
+                            <NoResultsPara>
+                              Try different keywords or remove search filter
+                            </NoResultsPara>
+                            <NoResultsButton onClick={this.retry}>
+                              Retry
+                            </NoResultsButton>
+                          </NoResults>
+                        ) : (
+                          <ContentDiv>
+                            {dataArray.map(item => (
+                              <Link
+                                to={`/videos/${item.id}`}
+                                className={
+                                  activeTheme === 'light'
+                                    ? 'link-light'
+                                    : 'link-dark'
+                                }
+                                key={item.id}
+                              >
+                                <ListContainer>
+                                  <ListItem>
+                                    <ImageTag
+                                      src={`${item.thumbnail_url}`}
+                                      width="100%"
+                                    />
+                                  </ListItem>
+                                  <ListItem>
+                                    <div className="logo-div">
+                                      <ImageTag
+                                        src={`${item.channel.profile_image_url}`}
+                                        width="30px"
+                                      />
+                                    </div>
+                                    <div>
+                                      <ParaTag fontSize="15px">
+                                        {item.title}
+                                      </ParaTag>
+                                      <ParaTag fontSize="12px">
+                                        {item.channel.name}
+                                      </ParaTag>
+                                      <ParaTag fontSize="12px">
+                                        {item.view_count} views .{' '}
+                                        <span>{item.published_at}</span>
+                                      </ParaTag>
+                                    </div>
+                                  </ListItem>
+                                </ListContainer>
+                              </Link>
+                            ))}
+                          </ContentDiv>
+                        )}
+                      </>
                     </>
                   ) : (
                     <ErrorImage refresh={this.getVideos} />

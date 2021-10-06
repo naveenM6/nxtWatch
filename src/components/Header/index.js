@@ -53,6 +53,7 @@ class Header extends Component {
           const {activeTheme, changeTheme} = value
           const color = activeTheme === 'light' ? '#000000' : '#ffffff'
           const bgColor = activeTheme === 'light' ? '#ffffff' : '#231f20'
+          const navColor = activeTheme === 'light' ? 'blacked' : 'whiter'
           const onChangeTheme = () => {
             const val = activeTheme === 'light' ? 'dark' : 'light'
             changeTheme(val)
@@ -93,35 +94,23 @@ class Header extends Component {
                       color={activeTheme === 'light' ? '#000' : ' #d7dfe9'}
                     />
                   </Para>
-                  <Link
-                    to="/"
-                    className={activeTheme === 'light' ? 'dark' : 'light'}
-                  >
+                  <Link to="/" className={navColor}>
                     <ListItem color={`${color}`}>
                       <HiHome className="nav-icons" /> <span>Home</span>
                     </ListItem>
                   </Link>
-                  <Link
-                    to="/trending"
-                    className={activeTheme === 'light' ? 'dark' : 'light'}
-                  >
+                  <Link to="/trending" className={navColor}>
                     <ListItem color={`${color}`}>
                       <AiFillFire className="nav-icons" /> <span>Trending</span>
                     </ListItem>
                   </Link>
-                  <Link
-                    to="/gaming"
-                    className={activeTheme === 'light' ? 'dark' : 'light'}
-                  >
+                  <Link to="/gaming" className={navColor}>
                     <ListItem color={`${color}`}>
                       <SiYoutubegaming className="nav-icons" />{' '}
                       <span>Gaming</span>
                     </ListItem>
                   </Link>
-                  <Link
-                    to="/saved-videos"
-                    className={activeTheme === 'light' ? 'dark' : 'light'}
-                  >
+                  <Link to="/saved-videos" className={navColor}>
                     <ListItem color={`${color}`}>
                       <MdPlaylistAdd className="nav-icons" />
                       <span>Saved Videos</span>

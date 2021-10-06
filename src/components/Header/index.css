@@ -7,12 +7,18 @@ span {
 .animate:hover {
   animation: rotate 3s;
 }
+.blacked {
+  color: black;
+}
+.whiter {
+  color: white;
+}
 
-@keyframes rotate{
-    0%{
-        transform:rotateZ(90deg);
-    }
-    100%{
-        transform:rotateZ(-90deg);
-    }
+@keyframes rotate {
+  0% {
+    transform: rotateZ(90deg);
+  }
+  100% {
+    transform: rotateZ(-90deg);
+  }
 }

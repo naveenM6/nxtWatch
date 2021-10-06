@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 
-import {AiFillFire} from 'react-icons/ai'
+import {MdPlaylistAdd} from 'react-icons/md'
 
 import AppTheme from '../../context/Theme'
 
@@ -44,7 +44,7 @@ class SavedVideos extends Component {
                   <MainHeader
                     bgColor={activeTheme === 'light' ? '#f1f1f1' : '#181818'}
                   >
-                    <AiFillFire color="red" /> Saved Videos
+                    <MdPlaylistAdd color="red" /> Saved Videos
                   </MainHeader>
                   {savedVideos.map(data => (
                     <Link
@@ -61,8 +61,8 @@ class SavedVideos extends Component {
                         />
                         <ListContainer>
                           <ListItems fs="20px">{data.title}</ListItems>
-                          <ListItems>{data.channel.name}</ListItems>
-                          <ListItems>
+                          <ListItems fs="12px">{data.channel.name}</ListItems>
+                          <ListItems fs="12px">
                             {data.viewCount} Views . {data.publishedAt}
                           </ListItems>
                         </ListContainer>

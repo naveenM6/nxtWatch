@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+export const DivContainer = styled.div``
+
 export const ListContainer = styled.ul`
   list-style-type: none;
   width: 25%;

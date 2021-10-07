@@ -37,6 +37,7 @@ export const HeaderContentsLargeContainer = styled.div`
 `
 
 export const ImageEl = styled.img`
+  cursor: ${props => props.cursor};
   @media (max-width: 767px) {
     height: ${props => props.height};
     display: ${props => props.display};

@@ -45,6 +45,11 @@ class Header extends Component {
     history.replace('/login')
   }
 
+  onClickLogo = () => {
+    const {history} = this.props
+    history.replace('/')
+  }
+
   render() {
     const {displayHeader} = this.state
     return (
@@ -69,6 +74,9 @@ class Header extends Component {
                     ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
                     : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
                 }
+                alt="website logo"
+                onClick={this.onClickLogo}
+                cursor="pointer"
               />
               <HeaderContentsSmallContainer>
                 <ButtonElSmall onClick={onChangeTheme} color={`${color}`}>

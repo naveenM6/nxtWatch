@@ -4,6 +4,9 @@ export const SavedVideosMainDiv = styled.div`
   color: ${props => props.color};
   background-color: ${props => props.bgColor};
   height: 100vh;
+  @media (max-width: 767px) {
+    height: fit-content;
+  }
 `
 export const MainHeader = styled.h1`
   background-color: ${props => props.bgColor};

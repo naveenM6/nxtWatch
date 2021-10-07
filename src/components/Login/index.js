@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 
+import {Redirect} from 'react-router-dom'
+
 import {
   LoginContainer,
   ShadowContainer,
@@ -70,11 +72,26 @@ class Login extends Component {
   }
 
   render() {
-    const {visibility, username, showSubmitError, errorMsg} = this.state
+    const {
+      visibility,
+      username,
+      password,
+      showSubmitError,
+      errorMsg,
+    } = this.state
+
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
+
     return (
       <LoginContainer>
         <ShadowContainer>
-          <ImageEl src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
+          <ImageEl
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+            alt="website logo"
+          />
           <LoginFormContainer onSubmit={this.formSubmit}>
             <LoginDivContainer>
               <LabelEl>USERNAME</LabelEl>
@@ -90,6 +107,7 @@ class Login extends Component {
               <InputEl
                 type={visibility ? 'text' : 'password'}
                 placeholder="Password"
+                value={password}
                 onChange={this.onChangePassword}
               />
             </LoginDivContainer>

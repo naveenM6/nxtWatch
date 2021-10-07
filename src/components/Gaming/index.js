@@ -1,8 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-// import {Redirect} from 'react-router-dom'
 import {SiYoutubegaming} from 'react-icons/si'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import LoaderComp from '../Loader'
 
 import './index.css'
@@ -52,6 +51,10 @@ class Gaming extends Component {
 
   render() {
     const {dataArray, isLoading, status} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
     return (
       <AppTheme.Consumer>
         {value => {
@@ -61,7 +64,11 @@ class Gaming extends Component {
           const bgColor = activeTheme === 'light' ? '#f9f9f9' : '#000000'
 
           return (
-            <HomeContainer bgColor={`${bgColor}`} color={`${color}`}>
+            <HomeContainer
+              data-testid="loader"
+              bgColor={`${bgColor}`}
+              color={`${color}`}
+            >
               {isLoading ? (
                 <LoaderComp />
               ) : (
@@ -98,6 +105,7 @@ class Gaming extends Component {
                                 <ImageTag
                                   src={`${item.thumbnail_url}`}
                                   width="180px"
+                                  alt="video thumbnail"
                                 />
                               </ListItem>
                               <ListItem>

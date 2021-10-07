@@ -27,11 +27,17 @@ export const SavedVideosDiv = styled.div`
     padding: 30px 30px;
     padding-bottom: 0px;
   }
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
 `
 
 export const ListContainer = styled.ul`
   list-style-type: none;
   @media (max-width: 767px) {
+    align-self: baseline;
     padding: 10px;
   }
 `
@@ -41,7 +47,7 @@ export const ListItems = styled.li`
   font-size: ${props => props.fs};
   @media (max-width: 767px) {
     padding: 5px;
-    font-size: 10px;
+    font-size: 15px;
   }
 `
 
@@ -51,7 +57,7 @@ export const VideosImageEl = styled.img`
     height: 200px;
   }
   @media (max-width: 767px) {
-    width: 50%;
+    width: 100%;
     object-fit: contain;
   }
 `

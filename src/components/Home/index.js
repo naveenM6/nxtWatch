@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import {Link} from 'react-router-dom'
-// import {Redirect} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {AiOutlineSearch} from 'react-icons/ai'
 import LoaderComp from '../Loader'
 
@@ -77,6 +76,12 @@ class Home extends Component {
 
   render() {
     const {dataArray, isLoading, status, searchIp} = this.state
+
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
+
     return (
       <AppTheme.Consumer>
         {value => {

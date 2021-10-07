@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-// import {Redirect} from 'react-router-dom'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 import {AiFillFire} from 'react-icons/ai'
 
@@ -56,6 +55,10 @@ class Trending extends Component {
 
   render() {
     const {dataArray, isLoading, status} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
     return (
       <AppTheme.Consumer>
         {value => {

@@ -1,5 +1,6 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import {MdPlaylistAdd} from 'react-icons/md'
 
@@ -20,6 +21,11 @@ import {
 
 class SavedVideos extends Component {
   render() {
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
+
     return (
       <AppTheme.Consumer>
         {values => {
